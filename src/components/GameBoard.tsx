@@ -6,12 +6,21 @@ const GameBoard = () => {
   const [moles, setMoles] = useState<boolean[]>(new Array(9).fill(false));
   const [score, setScore] = useState<number>(0);
 
+  const updateMoles = (index: number, value: boolean) => {
+    const updatedMoles = [...moles];
+    updatedMoles[index] = value;
+    setMoles(updatedMoles);
+  };
+
   useEffect(() => {
+    let randomIndex: number;
     const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * moles.length);
-      const updatedMoles = [...moles];
-      updatedMoles[randomIndex] = true;
-      setMoles(updatedMoles);
+      randomIndex = Math.floor(Math.random() * moles.length);
+      updateMoles(randomIndex, true);
+
+      setTimeout(() => {
+        updateMoles(randomIndex, false);
+      }, 800);
     }, 1000);
 
     return () => {
@@ -21,9 +30,7 @@ const GameBoard = () => {
 
   const updateScore = (index: number) => {
     if (!moles[index]) return;
-    const updatedMoles = [...moles];
-    updatedMoles[index] = false;
-    setMoles(updatedMoles);
+    updateMoles(index, false);
     setScore(score + 1);
   };
 
