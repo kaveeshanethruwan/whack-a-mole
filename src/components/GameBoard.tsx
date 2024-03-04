@@ -1,13 +1,22 @@
 import mole from "../assets/mole.png";
 import hole from "../assets/hole.png";
 import useActions from "../hooks/useActions";
+import { useEffect } from "react";
 
-const GameBoard = () => {
-  const { score, moles, updateScore } = useActions();
+interface GameBoardProps {
+  isStarted: boolean;
+  onScoreChange: (newScore: number) => void;
+}
+
+const GameBoard = ({ isStarted, onScoreChange }: GameBoardProps) => {
+  const { score, moles, updateScore } = useActions(isStarted);
+
+  useEffect(() => {
+    onScoreChange(score);
+  }, [score, onScoreChange]);
 
   return (
     <>
-      <p>score: {score}</p>
       <div className="grid">
         {moles &&
           moles.map((item, index) => {

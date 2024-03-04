@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useActions = () => {
+const useActions = (isStarted: boolean) => {
   const [moles, setMoles] = useState<boolean[]>(new Array(9).fill(false));
   const [score, setScore] = useState<number>(0);
 
@@ -11,6 +11,7 @@ const useActions = () => {
   };
 
   useEffect(() => {
+    if (!isStarted) return;
     let randomIndex: number;
     const interval = setInterval(() => {
       randomIndex = Math.floor(Math.random() * moles.length);
