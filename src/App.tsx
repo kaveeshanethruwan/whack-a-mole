@@ -24,6 +24,7 @@ function App() {
           onScoreChange={(score: number) => {
             onScoreChange(score);
           }}
+          onFinish={onStartChange}
         />
       ) : null}
 
