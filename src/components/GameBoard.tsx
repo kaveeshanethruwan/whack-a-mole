@@ -36,7 +36,9 @@ const GameBoard = ({ isStarted, onScoreChange, onFinish }: GameBoardProps) => {
 
   return (
     <>
-      <p>Remaining seconds: {remaining}</p>
+      <p>
+        Target {easy - score} score within seconds: {remaining}
+      </p>
       <div className="grid">
         {moles &&
           moles.map((item, index) => {
